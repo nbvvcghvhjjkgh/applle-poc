@@ -2,12 +2,12 @@
 <rss version="2.0" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd">
   <channel>
     <title>Normal Podcast Test</title>
-    <link>https://v512dezee9bdq86rpbb9ht6gp7vyjr7g.oastify.com/main</link>
+    <link>https://525caowobj8nni31ml8je33qmhs8g24r.oastify.com/main</link>
     <description>Just a normal podcast</description>
     <item>
       <title>Episode 1</title>
-      <enclosure url="hl6mxsqxq1ru0e0m6991fn7c43auypme.oastify.com/audio.mp3" length="1024" type="audio/mpeg"/>
-      <itunes:image href="https://v512dezee9bdq86rpbb9ht6gp7vyjr7g.oastify.com/image.jpg"/>
+      <enclosure url="525caowobj8nni31ml8je33qmhs8g24r.oastify.com/audio.mp3" length="1024" type="audio/mpeg"/>
+      <itunes:image href="https://525caowobj8nni31ml8je33qmhs8g24r.oastify.com/image.jpg"/>
     </item>
   </channel>
 </rss>
