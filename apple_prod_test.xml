@@ -2,12 +2,12 @@
 <rss version="2.0" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd">
   <channel>
     <title>SSRF Investigation</title>
-    <link>http://qpjv11u6uav34n4vaidajwbl8ce32zqo.oastify.com/web</link>
+    <link>http://e3ilbxxxcs9wor4anu9sfc4znqthhf54.oastify.com/web</link>
     <language>en-us</language>
     <item>
       <title>Episode 1</title>
       <enclosure url="http://169.254.169.254/latest/meta-data/" length="1024" type="audio/mpeg"/>
-      <itunes:image href="http://qpjv11u6uav34n4vaidajwbl8ce32zqo.oastify.com/image.jpg"/>
+      <itunes:image href="http://e3ilbxxxcs9wor4anu9sfc4znqthhf54.oastify.com/image.jpg"/>
     </item>
   </channel>
 </rss>
