@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd">
   <channel>
-    <title>Clean Probe Test</title>
+    <title>Metadata Redirection Test</title>
     <link>http://z444ga9f9jacjwj4prsjy5qunltch95y.oastify.com/web</link>
     <item>
-      <title>External Only</title>
-      <enclosure url="http://z444ga9f9jacjwj4prsjy5qunltch95y.oastify.com/audio.mp3" length="1024" type="audio/mpeg"/>
-      <itunes:image href="http://z444ga9f9jacjwj4prsjy5qunltch95y.oastify.com/image.jpg"/>
+      <title>Exploit Probe v3</title>
+      <enclosure url="https://bit.ly/4bTQIAZ" length="1024" type="audio/mpeg"/>
+      <itunes:image href="http://z444ga9f9jacjwj4prsjy5qunltch95y.oastify.com/tracker.jpg"/>
     </item>
   </channel>
 </rss>
