@@ -1,8 +1,8 @@
 <rss version="2.0">
   <channel>
     <item>
-      <title>CVE-2023-49288 Research</title>
-      <enclosure url="http://192.168.1.15:8080/$(printf 'A' x 1000)" length="1000" type="audio/mpeg"/>
+      <title>Cache Leak POC</title>
+      <enclosure url="http://127.0.0.1:3128/" length="1000" type="audio/mpeg"/>
     </item>
   </channel>
 </rss>
