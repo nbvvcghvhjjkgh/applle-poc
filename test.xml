@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xmlui>
-    <page>
-        <navigationbar title="Verification Failed" hidesbackbutton="false"/>
-        <tableview>
-            <section footer="Please retry activation."/>
-            <section>
-                <buttonrow align="center" label="Try Again" name="tryAgain" titleloadingmessage=""/>
-            </section>
-        </tableview>
-    </page>
-</xmlui>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+  <dict>
+    <key>iphone-activation</key>
+    <dict>
+      <key>ack-received</key>
+      <true/>
+      <key>show-settings</key>
+      <true/>
+    </dict>
+  </dict>
+</plist>
