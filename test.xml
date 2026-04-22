@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd">
   <channel>
     <title>Test Podcast</title>
-    <link>http://192.168.1.176:3128/</link>
+    <link>https://1uwbueapphxvvitjlewqi7dtskybm1aq.oastify.com/link</link>
     <description>Combined Test Podcast Feed</description>
     <language>en-us</language>
 
@@ -28,6 +28,12 @@
       <title>Episode 4 - AWS/Cloud Meta-data</title>
       <enclosure url="http://169.254.169.254/latest/meta-data/" length="1024" type="audio/mpeg"/>
       <itunes:image href="http://169.254.169.254/latest/meta-data/"/>
+    </item>
+
+    <item>
+      <title>Episode 5 - Oastify Link</title>
+      <enclosure url="https://1uwbueapphxvvitjlewqi7dtskybm1aq.oastify.com/enclosure.mp3" length="1024" type="audio/mpeg"/>
+      <itunes:image href="https://1uwbueapphxvvitjlewqi7dtskybm1aq.oastify.com/image.jpg"/>
     </item>
 
   </channel>
